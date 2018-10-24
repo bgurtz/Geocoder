@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  	<strong>Name:</strong>
+  	<%= @location.name %>
+</p>
+
+<p>
+  	<strong>Address:</strong>
+  	<%= @location.address %>
+</p>
+
+<p>
+  	<strong>Latitude:</strong>
+  	<%= @location.latitude %>
+</p>
+
+<p>
+ 	<strong>Longitude:</strong>
+  	<%= @location.longitude %>
+</p>
+<table>
+	<tr>
+<th><%= image_tag "https://maps.googleapis.com/maps/api/staticmap?center=#{@location.latitude},#{@location.longitude}&zoom=15&scale=1&size=400x400&maptype=roadmap&key=AIzaSyDWFzTZ13_mS8PKbLxFIwk5hdduakvEIlE&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7C" %></th>
+<th><%= image_tag "https://maps.googleapis.com/maps/api/staticmap?center=#{@location.latitude},#{@location.longitude}&zoom=18&scale=1&size=400x400&maptype=hybrid&key=AIzaSyDWFzTZ13_mS8PKbLxFIwk5hdduakvEIlE&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7C" %></th>
+</tr>
+</table>
+
+<h3>Nearby Locations</h3>
+
+<ul>
+	<% for location in @location.nearbys(50) %>
+	<li><%= link_to location.address,	location %> (<%= location.distance.round(2) %> miles)</li>
+	<% end -%>
+</ul>
+
+<p>
+	<%= link_to 'Edit', edit_location_path(@location) %> |
+	<%= link_to 'Back', locations_path %>
+	<%= link_to 'View All', locations_path %>
+</p>
